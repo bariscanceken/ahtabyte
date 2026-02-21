@@ -1,0 +1,6 @@
+PyQt6
+pygetwindow
+pywin32
+psutil
+pywinauto
+pynput

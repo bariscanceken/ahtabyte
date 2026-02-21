@@ -42,9 +42,4 @@ class Effect(QWidget):
             self.movie.stop()
         QApplication.quit()
         event.accept()
-
-if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    screen = Effect()
-    screen.show()
-    sys.exit(app.exec())
+        
