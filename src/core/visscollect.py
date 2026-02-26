@@ -12,6 +12,5 @@ def capturescreen():
     img = img.resize((1280, 720))
     img_path = f"{save_path}/screen_{timestamp}.jpg"
     img.save(img_path, quality=30)
-    time.sleep(60) 
 
     return img_path

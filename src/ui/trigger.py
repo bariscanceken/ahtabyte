@@ -42,5 +42,5 @@ class Effect(QWidget):
 
         if hasattr(self, 'movie'):
             self.movie.stop()
-        QApplication.quit()
+        
         event.accept()

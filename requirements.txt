@@ -7,3 +7,6 @@ pynput
 pyautogui
 Pillow 
 pyscreeze
+chromadb
+openai
+onnxruntime
