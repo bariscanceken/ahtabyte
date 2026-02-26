@@ -4,3 +4,6 @@ pywin32
 psutil
 pywinauto
 pynput
+pyautogui
+Pillow 
+pyscreeze

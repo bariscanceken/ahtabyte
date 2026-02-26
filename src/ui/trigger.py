@@ -4,7 +4,9 @@ from PyQt6.QtGui import QMovie
 from PyQt6.QtCore import Qt, QTimer
 import os
 
-base_dir = os.path.dirname(os.path.abspath(__file__))
+current_dir = os.path.dirname(os.path.abspath(__file__))
+src_dir = os.path.dirname(current_dir)
+base_dir = os.path.dirname(os.path.abspath(src_dir))
 gif_path = os.path.join(base_dir, "media", "octosprite.gif")
 
 class Effect(QWidget):
@@ -42,4 +44,3 @@ class Effect(QWidget):
             self.movie.stop()
         QApplication.quit()
         event.accept()
-        
