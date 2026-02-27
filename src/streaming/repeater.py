@@ -27,6 +27,8 @@ class Repeater:
         self.context_file = os.path.join(BASE_DIR, "data", "chromacontext.md")
         os.makedirs(os.path.join(BASE_DIR, "data"), exist_ok=True)
         self.pipeline = RAGPipeline()
+        self.capture_every_n = 5  # 0 yaparsan ekran analizi tamamen kapanır
+        self._tick_index = 0
 
     def show_effect(self):
         self.effect = Effect()
@@ -41,16 +43,24 @@ class Repeater:
                 now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
                 active_windows = getwindows()
                 key_count, mouse_count = self.ticks.reset()
-                img_path = capturescreen()
+                self._tick_index += 1
+
+                img_path = None
+                if self.capture_every_n and self._tick_index % self.capture_every_n == 0:
+                    img_path = capturescreen()
 
                 signaler.show_effect_signal.emit()
 
-                context_block = f"ACTIVE_WINDOWS: {', '.join(active_windows)}\nKEYBOARD_TICKS: {key_count}\nMOUSE_TICKS: {mouse_count}"
-
-                self.pipeline.ingest(context_block, now) #,img_path for image analysis with openai
+                text = (
+                    f"TIME: {now}\n"
+                    f"ACTIVE_WINDOWS: {active_windows}\n"
+                    f"KEY_COUNT: {key_count}\n"
+                    f"MOUSE_COUNT: {mouse_count}"
+                )
+                self.pipeline.ingest(text, now, img_path=img_path)
 
                 with open(self.context_file, "a", encoding="utf-8") as f:
-                    f.write(f"\n---\nENTRY_START: {now}\n{context_block}\nSCREENSHOT_REF: {img_path}\nENTRY_END\n---\n")
+                    f.write(f"\n---\nENTRY_START: {now}\nSCREENSHOT_REF: {img_path or ''}\nENTRY_END\n---\n")
 
                 print(f"[{now}] Saved.")
 

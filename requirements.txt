@@ -10,3 +10,6 @@ pyscreeze
 chromadb
 openai
 onnxruntime
+flask
+matplotlib
+reportlab
