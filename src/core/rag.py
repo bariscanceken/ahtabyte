@@ -57,7 +57,7 @@ class RAGPipeline:
 
     def embed(self, entry_id, text, metadata):
         db = {}
-        if os.path.exists(DB_PATH):
+        if os.path.exists(DB_PATH) and os.path.getsize(DB_PATH) > 0:
             with open(DB_PATH, "r", encoding="utf-8") as f:
                 db = json.load(f)
 
