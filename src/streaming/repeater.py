@@ -27,7 +27,7 @@ class Repeater:
         self.context_file = os.path.join(BASE_DIR, "data", "chromacontext.md")
         os.makedirs(os.path.join(BASE_DIR, "data"), exist_ok=True)
         self.pipeline = RAGPipeline()
-        self.capture_every_n = 1  # 0 yaparsan ekran analizi tamamen kapanır
+        self.capture_every_n = 3  # 0 yaparsan ekran analizi tamamen kapanır
         self._tick_index = 0
 
     def show_effect(self):
